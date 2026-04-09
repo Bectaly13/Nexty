@@ -1,0 +1,7 @@
+{
+  "name": "nexty",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
