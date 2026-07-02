@@ -1,0 +1,109 @@
+.habits-content {
+  --background: var(--app-background);
+  --padding-bottom: calc(72px + var(--safe-bottom));
+}
+
+.habits-empty {
+  display: block;
+  padding-top: 32px;
+}
+
+.habits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 12px;
+  list-style: none;
+}
+
+.habits-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--app-surface);
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow);
+}
+
+.habits-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: var(--app-radius-full);
+  flex: 0 0 auto;
+}
+
+.habits-name {
+  flex: 1;
+  font-weight: 600;
+  color: var(--app-text);
+}
+
+.habits-notify {
+  color: var(--app-text-muted);
+}
+
+.habits-notify-active {
+  color: var(--app-accent);
+}
+
+.habits-notify-blocked {
+  opacity: 0.4;
+}
+
+.habits-action {
+  color: var(--app-text-muted);
+}
+
+.habits-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: calc(100% - 24px);
+  margin: 4px 12px 24px;
+  padding: 14px;
+  border: 1px dashed var(--app-border);
+  border-radius: var(--app-radius);
+  background: transparent;
+  color: var(--app-accent);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.habits-add-icon {
+  font-size: 20px;
+}
+
+.habits-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.habits-form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--app-text-muted);
+}
+
+.habits-form-input {
+  padding: 12px;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-sm);
+  background: var(--app-surface-2);
+  color: var(--app-text);
+  font-size: 15px;
+}
+
+.habits-form-colors {
+  margin-top: 4px;
+}
+
+.habits-form-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}

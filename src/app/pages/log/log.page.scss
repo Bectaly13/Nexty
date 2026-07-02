@@ -1,0 +1,55 @@
+.log-content {
+  --background: var(--app-background);
+  --padding-bottom: calc(72px + var(--safe-bottom));
+}
+
+.log-empty {
+  display: block;
+  padding-top: 32px;
+}
+
+.log-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+}
+
+.log-label {
+  margin-top: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--app-text-muted);
+}
+
+.log-input,
+.log-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-sm);
+  background: var(--app-surface);
+  color: var(--app-text);
+  font-size: 15px;
+  font-family: inherit;
+}
+
+.log-textarea {
+  resize: none;
+  overflow-y: auto;
+}
+
+.log-submit {
+  margin-top: 16px;
+  padding: 14px;
+  border: none;
+  border-radius: var(--app-radius);
+  background: var(--app-accent-gradient);
+  color: var(--app-on-accent);
+  font-size: 16px;
+  font-weight: 700;
+  box-shadow: var(--app-accent-glow);
+  cursor: pointer;
+}
+

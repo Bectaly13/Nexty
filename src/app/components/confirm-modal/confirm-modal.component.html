@@ -1,0 +1,15 @@
+<app-modal [open]="open()" [title]="title()" (dismiss)="onCancel()">
+  <p class="confirm-modal-message">{{ message() }}</p>
+
+  <div class="confirm-modal-actions" modalFooter>
+    <button class="modal-btn" type="button" (click)="onCancel()">{{ cancelLabel() }}</button>
+    <button
+      class="modal-btn"
+      [class.modal-btn-danger]="danger()"
+      [class.modal-btn-primary]="!danger()"
+      type="button"
+      (click)="onConfirm()">
+      {{ confirmLabel() }}
+    </button>
+  </div>
+</app-modal>

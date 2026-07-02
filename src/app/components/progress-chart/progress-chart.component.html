@@ -1,0 +1,15 @@
+<div class="progress-chart">
+  @if (hasData()) {
+    <div class="progress-chart-plot">
+      <div class="progress-chart-axis">
+        <span class="progress-chart-axis-label">{{ maxValue() }}</span>
+        <span class="progress-chart-axis-label">0</span>
+      </div>
+      <svg class="progress-chart-svg" [attr.viewBox]="viewBox" preserveAspectRatio="none">
+        <polyline class="progress-chart-line" [attr.points]="points()" [style.stroke]="color()"></polyline>
+      </svg>
+    </div>
+  } @else {
+    <p class="progress-chart-empty">Aucune donnée</p>
+  }
+</div>

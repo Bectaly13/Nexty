@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'nexty',
+  appId: 'com.nexty.app',
+  appName: 'Nexty',
   webDir: 'www'
 };
 

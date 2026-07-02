@@ -1,0 +1,43 @@
+.versions-content {
+  --background: var(--app-background);
+  --padding-bottom: calc(16px + var(--safe-bottom));
+}
+
+.versions-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+.versions-item {
+  padding: 16px;
+  background: var(--app-surface);
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow);
+}
+
+.versions-version {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--app-accent);
+}
+
+.versions-first {
+  margin: 0;
+  color: var(--app-text-muted);
+}
+
+.versions-points {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.versions-point {
+  color: var(--app-text);
+  line-height: 1.4;
+}

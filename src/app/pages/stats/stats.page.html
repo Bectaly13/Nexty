@@ -1,0 +1,73 @@
+<ion-header class="stats-header">
+  <app-header class="header" title="Statistiques"></app-header>
+</ion-header>
+
+@if (habits.length > 0) {
+  <div class="stats-toolbar">
+    <app-habit-dropdown [habits]="habits" [selectedId]="currentId" (pick)="onPickHabit($event)"></app-habit-dropdown>
+  </div>
+}
+
+<ion-content [fullscreen]="true" class="stats-content">
+  @if (!loaded) {
+  } @else if (habits.length === 0) {
+    <app-empty-state
+      class="stats-empty"
+      title="Aucune habitude"
+      message="Ajoute une habitude pour voir ses statistiques."
+      actionLabel="Aller aux habitudes"
+      (action)="goToHabits()">
+    </app-empty-state>
+  } @else {
+    <div class="stats-body">
+      <div class="stats-since">
+        <span class="stats-since-label">Depuis le dernier log</span>
+        @if (since) {
+          <span class="stats-since-value">
+            @if (since.days > 0) {
+              <span class="stats-since-part">{{ since.days }}j</span>
+            }
+            <span class="stats-since-part">{{ since.hours }}h</span>
+            <span class="stats-since-part">{{ since.minutes }}m</span>
+            <span class="stats-since-part">{{ since.seconds }}s</span>
+          </span>
+        } @else {
+          <span class="stats-since-value stats-since-empty">Aucun log</span>
+        }
+      </div>
+
+      <div class="stats-counts">
+        <div class="stats-count">
+          <span class="stats-count-value">{{ countsDisplay.day }}</span>
+          <span class="stats-count-label">Aujourd'hui</span>
+        </div>
+        <div class="stats-count">
+          <span class="stats-count-value">{{ countsDisplay.week }}</span>
+          <span class="stats-count-label">Cette semaine</span>
+        </div>
+        <div class="stats-count">
+          <span class="stats-count-value">{{ countsDisplay.month }}</span>
+          <span class="stats-count-label">Ce mois</span>
+        </div>
+      </div>
+
+      <app-month-calendar
+        class="stats-calendar"
+        [markedDays]="markedDays"
+        [markColor]="markColor"
+        (monthChange)="onMonthChange($event)">
+      </app-month-calendar>
+
+      <div class="stats-chart-head">
+        <span class="stats-chart-title">Tendance</span>
+        <div class="stats-chart-tabs">
+          <button class="stats-chart-tab" [class.stats-chart-tab-active]="chartDays === 7" type="button" (click)="setChartDays(7)">7 j</button>
+          <button class="stats-chart-tab" [class.stats-chart-tab-active]="chartDays === 30" type="button" (click)="setChartDays(30)">30 j</button>
+        </div>
+      </div>
+      <app-progress-chart class="stats-chart" [data]="chartData" [color]="markColor"></app-progress-chart>
+    </div>
+  }
+</ion-content>
+
+<app-navbar class="stats-navbar"></app-navbar>

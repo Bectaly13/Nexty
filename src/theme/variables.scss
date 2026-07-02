@@ -1,2 +1,99 @@
-// For information on how to create your own theme, please refer to:
-// https://ionicframework.com/docs/theming/
+/* =========================================================================
+   Variables de thème — Nexty
+   -------------------------------------------------------------------------
+   Accent bleu océan, direction « tech / lumineux » (glow léger sur l'accent,
+   surtout marqué en thème Sombre). Deux thèmes : Clair (défaut) et Sombre,
+   appliqués par ThemeService via une classe sur <body> (theme-light /
+   theme-dark). Aucune couleur en dur ailleurs : tout passe par ces variables.
+   ========================================================================= */
+
+/* ----- Constantes indépendantes du thème ----- */
+:root {
+  /* Safe areas (encoche / barres système) */
+  --safe-top: env(safe-area-inset-top);
+  --safe-bottom: env(safe-area-inset-bottom);
+
+  /* Accent (identité de l'app) */
+  --app-accent: #3B82F6;
+  --app-accent-strong: #2563EB;
+  --app-on-accent: #FFFFFF;
+  --app-accent-gradient: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+
+  /* Rayons d'arrondi (lignes douces, « pas trop carré ») */
+  --app-radius-sm: 12px;
+  --app-radius: 18px;
+  --app-radius-lg: 26px;
+  --app-radius-full: 999px;
+}
+
+/* ----- Thème clair (par défaut : posé aussi sur :root pour éviter le flash
+   avant que ThemeService n'applique la classe) ----- */
+:root,
+body.theme-light {
+  --app-background: #F1F5F9;
+  --app-surface: #FFFFFF;
+  --app-surface-2: #F8FAFC;
+  --app-text: #0F172A;
+  --app-text-muted: #64748B;
+  --app-border: #E2E8F0;
+
+  --app-accent-soft: rgba(59, 130, 246, 0.10); /* fonds d'états actifs / puces */
+  --app-danger: #EF4444;
+  --app-on-danger: #FFFFFF;
+
+  --app-backdrop: rgba(15, 23, 42, 0.45);
+  --app-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+  --app-shadow-strong: 0 8px 28px rgba(15, 23, 42, 0.12);
+  --app-accent-glow: 0 0 0 rgba(59, 130, 246, 0); /* glow quasi nul en clair */
+
+  /* Header */
+  --header-background: #FFFFFF;
+  --header-text: #0F172A;
+  --header-border: #E2E8F0;
+
+  /* Navbar */
+  --navbar-background: #FFFFFF;
+  --navbar-border: #E2E8F0;
+  --navbar-icon: #94A3B8;
+  --navbar-icon-active: var(--app-accent);
+
+  /* Welcome / splash (glow discret en clair) */
+  --welcome-background: radial-gradient(circle at 50% 38%, #FFFFFF 0%, #F1F5F9 55%, #E7EEF7 100%);
+  --welcome-title-gradient: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+  --welcome-logo-glow: radial-gradient(circle closest-side, rgba(59, 130, 246, 0.55) 0%, rgba(59, 130, 246, 0.30) 45%, rgba(59, 130, 246, 0) 100%);
+}
+
+/* ----- Thème sombre ----- */
+body.theme-dark {
+  --app-background: #0B1220;
+  --app-surface: #131C2E;
+  --app-surface-2: #0F1829;
+  --app-text: #E9EEF5;
+  --app-text-muted: #8CA0BA;
+  --app-border: #223049;
+
+  --app-accent-soft: rgba(96, 165, 250, 0.16);
+  --app-danger: #F87171;
+  --app-on-danger: #FFFFFF;
+
+  --app-backdrop: rgba(2, 6, 16, 0.65);
+  --app-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  --app-shadow-strong: 0 10px 32px rgba(0, 0, 0, 0.55);
+  --app-accent-glow: 0 0 18px rgba(59, 130, 246, 0.45); /* glow marqué en sombre */
+
+  /* Header */
+  --header-background: #0F1829;
+  --header-text: #E9EEF5;
+  --header-border: #223049;
+
+  /* Navbar */
+  --navbar-background: #0F1829;
+  --navbar-border: #223049;
+  --navbar-icon: #64748B;
+  --navbar-icon-active: #60A5FA; /* bleu plus lumineux en sombre */
+
+  /* Welcome / splash (glow marqué en sombre) */
+  --welcome-background: radial-gradient(circle at 50% 34%, #16233C 0%, #0B1220 58%, #070B14 100%);
+  --welcome-title-gradient: linear-gradient(135deg, #7DB4FF 0%, #3B82F6 100%);
+  --welcome-logo-glow: radial-gradient(circle closest-side, rgba(80, 150, 255, 0.55) 0%, rgba(80, 150, 255, 0.30) 45%, rgba(80, 150, 255, 0) 100%);
+}

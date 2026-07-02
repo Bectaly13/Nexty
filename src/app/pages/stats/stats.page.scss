@@ -1,0 +1,119 @@
+.stats-content {
+  --background: var(--app-background);
+  --padding-bottom: calc(72px + var(--safe-bottom));
+}
+
+.stats-empty {
+  display: block;
+  padding-top: 32px;
+}
+
+.stats-toolbar {
+  position: relative;
+  z-index: 20; /* la liste déroulante du dropdown passe au-dessus du contenu */
+  padding: 12px;
+  background: var(--app-background);
+  border-bottom: 1px solid var(--app-border);
+}
+
+.stats-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+.stats-since {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  background: var(--app-surface);
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow);
+}
+
+.stats-since-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--app-text-muted);
+}
+
+.stats-since-value {
+  display: flex;
+  gap: 10px;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--app-text);
+}
+
+.stats-since-empty {
+  font-size: 18px;
+  color: var(--app-text-muted);
+}
+
+.stats-counts {
+  display: flex;
+  gap: 10px;
+}
+
+.stats-count {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 8px;
+  background: var(--app-surface);
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow);
+}
+
+.stats-count-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--app-accent);
+}
+
+.stats-count-label {
+  font-size: 12px;
+  color: var(--app-text-muted);
+  text-align: center;
+}
+
+.stats-chart-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stats-chart-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--app-text);
+}
+
+.stats-chart-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 3px;
+  background: var(--app-surface-2);
+  border-radius: var(--app-radius-full);
+}
+
+.stats-chart-tab {
+  padding: 6px 14px;
+  border: none;
+  border-radius: var(--app-radius-full);
+  background: transparent;
+  color: var(--app-text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.stats-chart-tab-active {
+  background: var(--app-surface);
+  color: var(--app-accent);
+  box-shadow: var(--app-shadow);
+}

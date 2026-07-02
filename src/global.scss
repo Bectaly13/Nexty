@@ -1,12 +1,9 @@
 /*
  * App Global CSS
  * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
+ * Styles globaux de l'app (au-delà d'un seul composant) + point d'entrée pour
+ * importer les CSS/Sass Ionic. Les variables de thème vivent dans
+ * src/theme/variables.scss.
  */
 
 /* Core CSS required for Ionic components to work properly */
@@ -25,13 +22,95 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
+/*
+ * Mode sombre : on n'utilise PAS le mode sombre automatique d'Ionic. Les thèmes
+ * (Clair / Sombre) sont pilotés par ThemeService via une classe sur <body>.
+ * La ligne dark.system.css est donc volontairement désactivée.
  */
+/* @import "@ionic/angular/css/palettes/dark.system.css"; */
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+/* ----- Styles de base ----- */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  background: var(--app-background);
+  color: var(--app-text);
+  /* Transition douce lors d'un changement de thème. */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* On style les composants Ionic via nos propres variables (pas de --ion-xxx). */
+ion-content {
+  --background: var(--app-background);
+  --color: var(--app-text);
+}
+
+/* ----- Utilitaires partagés ----- */
+
+/* Bouton d'icône (carré arrondi, discret) — header, navbar secondaire, cartes… */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: var(--app-radius-sm);
+  background: transparent;
+  color: var(--app-text);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Boutons de modale (voir app-modal / app-confirm-modal en P4). */
+.modal-btn {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-sm);
+  background: var(--app-surface-2);
+  color: var(--app-text);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.modal-btn-primary {
+  border: none;
+  background: var(--app-accent-gradient);
+  color: var(--app-on-accent);
+  box-shadow: var(--app-accent-glow);
+}
+
+.modal-btn-danger {
+  border: none;
+  background: var(--app-danger);
+  color: var(--app-on-danger);
+}
+
+/* Champs date/heure : apparence neutre, sans l'icône native façon dropdown.
+   (En global : l'encapsulation des composants n'atteint pas le shadow DOM de l'input.) */
+input[type="datetime-local"] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+/* Toast de confirmation éphémère (bas d'écran, au-dessus de la navbar). */
+.app-toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(84px + var(--safe-bottom));
+  transform: translateX(-50%);
+  z-index: 1500;
+  padding: 12px 20px;
+  background: var(--app-text);
+  color: var(--app-surface);
+  border-radius: var(--app-radius-full);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: var(--app-shadow-strong);
+}

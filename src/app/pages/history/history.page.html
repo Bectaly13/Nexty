@@ -1,0 +1,78 @@
+<ion-header class="history-header">
+  <app-header class="header" title="Historique"></app-header>
+</ion-header>
+
+@if (habits.length > 0) {
+  <div class="history-toolbar">
+    <app-habit-dropdown [habits]="habits" [selectedId]="currentId" (pick)="onPickHabit($event)"></app-habit-dropdown>
+  </div>
+}
+
+<ion-content [fullscreen]="true" class="history-content">
+  @if (!loaded) {
+  } @else if (habits.length === 0) {
+    <app-empty-state
+      class="history-empty"
+      title="Aucune habitude"
+      message="Ajoute une habitude pour suivre son historique."
+      actionLabel="Aller aux habitudes"
+      (action)="goToHabits()">
+    </app-empty-state>
+  } @else if (logs.length === 0) {
+    <app-empty-state
+      class="history-empty"
+      title="Aucun log"
+      message="Aucune occurrence enregistrée pour cette habitude.">
+    </app-empty-state>
+  } @else {
+    <ul class="history-list">
+      @for (log of displayedLogs; track log.id) {
+        <li class="history-item" [style.animation-delay.ms]="($index % pageSize) * 12">
+          <div class="history-item-main">
+            <span class="history-item-date">{{ formatDate(log.occurredAt) }}</span>
+            @if (log.comment) {
+              <span class="history-item-comment">{{ log.comment }}</span>
+            }
+          </div>
+
+          <button class="icon-btn history-action" type="button" (click)="openEdit(log)">
+            <ion-icon name="create-outline"></ion-icon>
+          </button>
+          <button class="icon-btn history-action" type="button" (click)="openDelete(log)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </button>
+        </li>
+      }
+    </ul>
+  }
+
+  <div #sentinel class="history-sentinel"></div>
+</ion-content>
+
+<app-navbar class="history-navbar"></app-navbar>
+
+<app-modal [open]="editModal.open" title="Modifier le log" (dismiss)="closeEdit()">
+  <div class="history-form">
+    <label class="history-form-label">Date et heure</label>
+    <input class="history-form-input" type="datetime-local" [(ngModel)]="editModal.occurredAt" />
+
+    <label class="history-form-label">Commentaire (optionnel)</label>
+    <textarea class="history-form-textarea" [(ngModel)]="editModal.comment" rows="3"></textarea>
+  </div>
+
+  <div class="history-form-actions" modalFooter>
+    <button class="modal-btn" type="button" (click)="closeEdit()">Annuler</button>
+    <button class="modal-btn modal-btn-primary" type="button" (click)="saveEdit()">Enregistrer</button>
+  </div>
+</app-modal>
+
+<app-confirm-modal
+  [open]="deleteModal.open"
+  title="Supprimer le log"
+  message="Supprimer cette occurrence ? Cette action est irréversible."
+  confirmLabel="Supprimer"
+  cancelLabel="Annuler"
+  [danger]="true"
+  (confirm)="confirmDelete()"
+  (cancelled)="closeDelete()">
+</app-confirm-modal>

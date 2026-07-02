@@ -1,0 +1,141 @@
+.settings-content {
+  --background: var(--app-background);
+  --padding-bottom: calc(72px + var(--safe-bottom));
+}
+
+.settings-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 16px;
+}
+
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.settings-section-title {
+  margin: 0 0 2px 4px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--app-text-muted);
+}
+
+.settings-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  background: var(--app-surface);
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow);
+  color: var(--app-text);
+  text-align: left;
+}
+
+.settings-row {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.settings-row-label {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.settings-row-value {
+  color: var(--app-text-muted);
+}
+
+.settings-row-chevron {
+  font-size: 18px;
+  color: var(--app-text-muted);
+}
+
+.settings-themes {
+  display: flex;
+  gap: 8px;
+}
+
+.settings-theme {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-sm);
+  background: var(--app-surface-2);
+  color: var(--app-text);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.settings-theme-active {
+  border-color: transparent;
+  background: var(--app-accent-soft);
+  color: var(--app-accent);
+}
+
+.settings-switch {
+  position: relative;
+  width: 46px;
+  height: 28px;
+  border-radius: var(--app-radius-full);
+  background: var(--app-border);
+  transition: background 0.2s ease;
+  flex: 0 0 auto;
+}
+
+.settings-switch-on {
+  background: var(--app-accent);
+}
+
+.settings-switch-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--app-radius-full);
+  background: #ffffff;
+  transition: transform 0.2s ease;
+}
+
+.settings-switch-on .settings-switch-knob {
+  transform: translateX(18px);
+}
+
+.settings-warning {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--app-surface);
+  border: 1px solid var(--app-danger);
+  border-radius: var(--app-radius);
+}
+
+.settings-warning-text {
+  font-size: 14px;
+  color: var(--app-text-muted);
+}
+
+.settings-warning-btn {
+  align-self: flex-start;
+  padding: 8px 16px;
+  border: none;
+  border-radius: var(--app-radius-sm);
+  background: var(--app-accent-gradient);
+  color: var(--app-on-accent);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+

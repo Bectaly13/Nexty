@@ -1,0 +1,22 @@
+<ion-header class="versions-header">
+  <app-header class="header" title="Notes de version" [showBack]="true" (back)="goBack()"></app-header>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="versions-content">
+  <div class="versions-body">
+    @for (release of releases; track release.version) {
+      <section class="versions-item">
+        <h2 class="versions-version">Version {{ release.version }}</h2>
+        @if (release.points.length === 0) {
+          <p class="versions-first">Première version</p>
+        } @else {
+          <ul class="versions-points">
+            @for (point of release.points; track point) {
+              <li class="versions-point">{{ point }}</li>
+            }
+          </ul>
+        }
+      </section>
+    }
+  </div>
+</ion-content>

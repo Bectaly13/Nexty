@@ -1,0 +1,83 @@
+<ion-header class="habits-header">
+  <app-header class="header" title="Habitudes"></app-header>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="habits-content">
+  @if (!loaded) {
+  } @else if (habits.length === 0) {
+    <app-empty-state
+      class="habits-empty"
+      title="Aucune habitude"
+      message="Ajoute ta première habitude à suivre."
+      actionLabel="Ajouter une habitude"
+      (action)="openCreate()">
+    </app-empty-state>
+  } @else {
+    <ul class="habits-list">
+      @for (habit of habits; track habit.id) {
+        <li class="habits-item">
+          <span class="habits-dot" [style.background]="colorOf(habit.colorId)"></span>
+          <span class="habits-name">{{ habit.name }}</span>
+
+          <button
+            class="icon-btn habits-notify"
+            [class.habits-notify-active]="notificationsActive && habit.notify"
+            [class.habits-notify-blocked]="!notificationsActive"
+            type="button"
+            (click)="toggleNotify(habit)">
+            <ion-icon [name]="(notificationsActive && habit.notify) ? 'notifications-outline' : 'notifications-off-outline'"></ion-icon>
+          </button>
+
+          <button class="icon-btn habits-action" type="button" (click)="openEdit(habit)">
+            <ion-icon name="create-outline"></ion-icon>
+          </button>
+
+          <button class="icon-btn habits-action" type="button" (click)="openDelete(habit)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </button>
+        </li>
+      }
+    </ul>
+
+    <button class="habits-add" type="button" (click)="openCreate()">
+      <ion-icon class="habits-add-icon" name="add"></ion-icon>
+      Ajouter une habitude
+    </button>
+  }
+</ion-content>
+
+<app-navbar class="habits-navbar"></app-navbar>
+
+<app-modal
+  [open]="editModal.open"
+  [title]="editModal.id ? 'Modifier l’habitude' : 'Nouvelle habitude'"
+  (dismiss)="closeEdit()">
+  <div class="habits-form">
+    <label class="habits-form-label">Nom</label>
+    <input class="habits-form-input" type="text" [(ngModel)]="editModal.name" placeholder="Ex. Cigarette" />
+
+    <label class="habits-form-label">Couleur</label>
+    <app-color-picker
+      class="habits-form-colors"
+      [colors]="colors"
+      [selectedId]="editModal.colorId"
+      (pick)="pickColor($event)">
+    </app-color-picker>
+  </div>
+
+  <div class="habits-form-actions" modalFooter>
+    <button class="modal-btn" type="button" (click)="closeEdit()">Annuler</button>
+    <button class="modal-btn modal-btn-primary" type="button" (click)="saveEdit()">Enregistrer</button>
+  </div>
+</app-modal>
+
+<app-confirm-modal
+  [open]="deleteModal.open"
+  title="Supprimer l’habitude"
+  [message]="'Supprimer « ' + deleteModal.name + ' » et tous ses logs ? Cette action est irréversible.'"
+  confirmLabel="Supprimer"
+  cancelLabel="Annuler"
+  [danger]="true"
+  (confirm)="confirmDelete()"
+  (cancelled)="closeDelete()">
+</app-confirm-modal>

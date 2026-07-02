@@ -1,0 +1,11 @@
+.confirm-modal-message {
+  margin: 0;
+  color: var(--app-text-muted);
+  line-height: 1.4;
+}
+
+.confirm-modal-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}

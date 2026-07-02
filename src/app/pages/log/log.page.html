@@ -1,0 +1,40 @@
+<ion-header class="log-header">
+  <app-header class="header" title="Nouveau log"></app-header>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="log-content">
+  @if (!loaded) {
+  } @else if (habits.length === 0) {
+    <app-empty-state
+      class="log-empty"
+      title="Aucune habitude"
+      message="Crée d'abord une habitude pour pouvoir la suivre."
+      actionLabel="Aller aux habitudes"
+      (action)="goToHabits()">
+    </app-empty-state>
+  } @else {
+    <div class="log-form">
+      <label class="log-label">Habitude</label>
+      <app-habit-dropdown
+        class="log-dropdown"
+        [habits]="habits"
+        [selectedId]="currentId"
+        (pick)="onPickHabit($event)">
+      </app-habit-dropdown>
+
+      <label class="log-label">Date et heure</label>
+      <input class="log-input" type="datetime-local" [(ngModel)]="occurredAt" />
+
+      <label class="log-label">Commentaire (optionnel)</label>
+      <textarea class="log-textarea" [(ngModel)]="comment" rows="3" placeholder="Une note…"></textarea>
+
+      <button class="log-submit" type="button" (click)="submit()">Enregistrer le log</button>
+    </div>
+  }
+</ion-content>
+
+@if (toastOpen) {
+  <div class="app-toast">{{ toastMessage }}</div>
+}
+
+<app-navbar class="log-navbar"></app-navbar>

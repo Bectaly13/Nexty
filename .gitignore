@@ -68,3 +68,9 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Documentation interne (cahier des charges, notes de conception)
+/docs
+
+# Icônes/splash hérités du starter Ionic (non utilisés : on génère via assets/)
+/resources

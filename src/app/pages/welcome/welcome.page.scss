@@ -1,0 +1,51 @@
+.welcome-content {
+  --background: var(--welcome-background);
+}
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 24px;
+}
+
+.welcome-logo-wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+/* Halo lumineux derrière le logo (pseudo-élément : l'<img> ne peut pas en porter).
+   Centré explicitement sur le wrapper ; blur pour lisser le banding du dégradé radial. */
+.welcome-logo-wrap::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--welcome-logo-glow);
+  filter: blur(26px);
+}
+
+.welcome-logo {
+  position: relative;
+  width: 132px;
+  height: 132px;
+}
+
+.welcome-title {
+  margin: 0;
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: var(--welcome-title-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}

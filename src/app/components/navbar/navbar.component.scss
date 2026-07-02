@@ -1,0 +1,62 @@
+.navbar {
+  /* Toujours collée au bas de l'écran ; son fond s'étend sous la safe area système
+     (grâce au padding-bottom) → pas de « gap » sous la navbar. */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-top: 10px;
+  padding-bottom: calc(10px + var(--safe-bottom));
+  background: var(--navbar-background);
+  border-top: 1px solid var(--navbar-border);
+}
+
+.navbar-item {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  color: var(--navbar-icon);
+  text-decoration: none;
+}
+
+.navbar-item-active {
+  color: var(--navbar-icon-active);
+}
+
+.navbar-icon {
+  font-size: 22px;
+}
+
+.navbar-label {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.navbar-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-top: -22px;
+  border-radius: var(--app-radius-full);
+  background: var(--app-accent-gradient);
+  color: var(--app-on-accent);
+  box-shadow: var(--app-shadow-strong), var(--app-accent-glow);
+  text-decoration: none;
+}
+
+.navbar-center-icon {
+  font-size: 30px;
+}
+
+.navbar-center-active {
+  filter: brightness(1.05);
+}

@@ -1,0 +1,22 @@
+<div class="modal">
+  @if (open()) {
+    <div class="modal-backdrop" @backdropAnim (click)="onDismiss()"></div>
+
+    <div class="modal-card" @sheetAnim>
+      <div class="modal-header">
+        <h2 class="modal-title">{{ title() }}</h2>
+        <button class="modal-close" type="button" (click)="onDismiss()">
+          <ion-icon class="modal-close-icon" name="close"></ion-icon>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <ng-content></ng-content>
+      </div>
+
+      <div class="modal-footer">
+        <ng-content select="[modalFooter]"></ng-content>
+      </div>
+    </div>
+  }
+</div>

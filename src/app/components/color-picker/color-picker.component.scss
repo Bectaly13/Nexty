@@ -1,0 +1,21 @@
+.color-picker {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  justify-items: center;
+}
+
+.color-picker-swatch {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: var(--app-radius-full);
+  box-shadow: 0 0 0 1px var(--app-border);
+  cursor: pointer;
+}
+
+.color-picker-swatch-active {
+  border-color: var(--app-surface);
+  box-shadow: 0 0 0 2px var(--app-text);
+}

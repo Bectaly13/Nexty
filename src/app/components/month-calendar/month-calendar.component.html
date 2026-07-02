@@ -1,0 +1,30 @@
+<div class="month-calendar">
+  <div class="month-calendar-header">
+    <button class="month-calendar-nav" type="button" (click)="prev()">
+      <ion-icon class="month-calendar-nav-icon" name="chevron-back"></ion-icon>
+    </button>
+    <span class="month-calendar-label">{{ monthLabel() }}</span>
+    <button class="month-calendar-nav" type="button" (click)="next()">
+      <ion-icon class="month-calendar-nav-icon" name="chevron-forward"></ion-icon>
+    </button>
+  </div>
+
+  <div class="month-calendar-grid">
+    @for (wd of weekdays; track $index) {
+      <span class="month-calendar-weekday">{{ wd }}</span>
+    }
+
+    @for (cell of cells(); track $index) {
+      <span class="month-calendar-cell">
+        @if (cell !== null) {
+          <span
+            class="month-calendar-day"
+            [class.month-calendar-day-marked]="isMarked(cell)"
+            [style.background]="isMarked(cell) ? markColor() : ''">
+            {{ cell }}
+          </span>
+        }
+      </span>
+    }
+  </div>
+</div>

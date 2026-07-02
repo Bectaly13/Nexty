@@ -1,0 +1,22 @@
+<div class="habit-dropdown">
+  <button class="habit-dropdown-trigger" type="button" (click)="toggle()">
+    @if (selected; as sel) {
+      <span class="habit-dropdown-dot" [style.background]="colorOf(sel)"></span>
+      <span class="habit-dropdown-name">{{ sel.name }}</span>
+    } @else {
+      <span class="habit-dropdown-name habit-dropdown-name-empty">Aucune habitude</span>
+    }
+    <ion-icon class="habit-dropdown-caret" name="chevron-down"></ion-icon>
+  </button>
+
+  @if (open) {
+    <ul class="habit-dropdown-list">
+      @for (habit of habits(); track habit.id) {
+        <li class="habit-dropdown-option" (click)="choose(habit)">
+          <span class="habit-dropdown-dot" [style.background]="colorOf(habit)"></span>
+          <span class="habit-dropdown-name">{{ habit.name }}</span>
+        </li>
+      }
+    </ul>
+  }
+</div>

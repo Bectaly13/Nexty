@@ -1,0 +1,11 @@
+<div class="color-picker">
+  @for (color of colors(); track color.id) {
+    <button
+      class="color-picker-swatch"
+      [class.color-picker-swatch-active]="color.id === selectedId()"
+      [style.background]="color.value"
+      type="button"
+      (click)="choose(color)">
+    </button>
+  }
+</div>

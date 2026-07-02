@@ -28,6 +28,15 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "allowedCommonJsDependencies": [
+              "dayjs",
+              "dayjs/locale/fr",
+              "dayjs/plugin/isoWeek",
+              "dayjs/plugin/isSameOrBefore",
+              "dayjs/plugin/isSameOrAfter",
+              "dayjs/plugin/customParseFormat",
+              "localforage"
+            ],
             "assets": [
               {
                 "glob": "**/*",
@@ -49,8 +58,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "6kb",
+                  "maximumError": "12kb"
                 }
               ],
               "fileReplacements": [
