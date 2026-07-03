@@ -41,9 +41,13 @@
 
 .stats-since-value {
   display: flex;
+  align-items: center;
   gap: 10px;
+  // Hauteur fixe : compteur et « Aucun log » occupent la même hauteur (pas de saut).
+  min-height: 32px;
   font-size: 26px;
   font-weight: 700;
+  line-height: 1.2;
   color: var(--app-text);
 }
 

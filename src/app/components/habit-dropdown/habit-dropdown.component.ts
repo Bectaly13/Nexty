@@ -46,6 +46,12 @@ export class HabitDropdownComponent implements OnInit {
     this.open = !this.open;
   }
 
+  // Referme la liste (appelé par la page hôte à l'arrivée, car Ionic garde la page
+  // en cache et l'état `open` persisterait sinon d'une visite à l'autre).
+  close() {
+    this.open = false;
+  }
+
   choose(habit: Habit) {
     this.open = false;
     this.pick.emit(habit.id);

@@ -40,6 +40,7 @@ export class StatsPage implements ViewWillEnter, ViewWillLeave {
   chartDays = 7;
 
   @ViewChild(IonContent) private content?: IonContent;
+  @ViewChild(HabitDropdownComponent) private dropdown?: HabitDropdownComponent;
   private lastLogAt: string | null = null;
   private monthAnchor = "";
   private timer: any;
@@ -49,6 +50,7 @@ export class StatsPage implements ViewWillEnter, ViewWillLeave {
     await this.theme.initTheme();
     await this.load();
     this.startTicker();
+    this.closeDropdown();
   }
 
   constructor(
@@ -168,6 +170,11 @@ export class StatsPage implements ViewWillEnter, ViewWillLeave {
   async setChartDays(days: number) {
     this.chartDays = days;
     await this.loadChart();
+  }
+
+  // Referme le dropdown d'habitude à l'arrivée sur la page (undefined si empty state).
+  private closeDropdown() {
+    this.dropdown?.close();
   }
 
   goToHabits() {

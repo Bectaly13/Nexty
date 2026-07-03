@@ -8,6 +8,13 @@ export interface ReleaseNote {
 
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: "1.0.1",
+    points: [
+      "Le sélecteur d'habitude se referme désormais toujours en revenant sur un onglet.",
+      "Affichage stabilisé de la section « Depuis le dernier log »."
+    ]
+  },
+  {
     version: "1.0",
     points: []
   }

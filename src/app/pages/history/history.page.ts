@@ -45,11 +45,13 @@ export class HistoryPage implements ViewWillEnter, AfterViewInit, OnDestroy {
 
   @ViewChild('sentinel') private sentinel?: ElementRef<HTMLElement>;
   @ViewChild(IonContent) private content?: IonContent;
+  @ViewChild(HabitDropdownComponent) private dropdown?: HabitDropdownComponent;
   private observer?: IntersectionObserver;
 
   async ionViewWillEnter() {
     await this.theme.initTheme();
     await this.load();
+    this.closeDropdown();
   }
 
   constructor(
@@ -151,6 +153,11 @@ export class HistoryPage implements ViewWillEnter, AfterViewInit, OnDestroy {
     if (this.currentId) {
       await this.notifications.rescheduleForHabit(this.currentId);
     }
+  }
+
+  // Referme le dropdown d'habitude à l'arrivée sur la page (undefined si empty state).
+  private closeDropdown() {
+    this.dropdown?.close();
   }
 
   goToHabits() {

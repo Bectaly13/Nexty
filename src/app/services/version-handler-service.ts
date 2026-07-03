@@ -21,7 +21,7 @@ export class VersionHandlerService {
   // Version **commerciale**, destinée à l'utilisateur (illustre l'ampleur des mises
   // à jour). Sans rapport avec appVersion. Doit toujours correspondre au versionName
   // de android/app/build.gradle.
-  readonly appVersionDisplay: string = "1.0";
+  readonly appVersionDisplay: string = "1.0.1";
 
   constructor(
     private storage: StorageService,

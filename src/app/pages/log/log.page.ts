@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonContent, IonHeader, ViewWillEnter } from '@ionic/angular/standalone';
@@ -34,9 +34,12 @@ export class LogPage implements ViewWillEnter {
   toastMessage = "";
   private toastTimer: any;
 
+  @ViewChild(HabitDropdownComponent) private dropdown?: HabitDropdownComponent;
+
   async ionViewWillEnter() {
     await this.theme.initTheme();
     await this.load();
+    this.closeDropdown();
   }
 
   constructor(
@@ -79,6 +82,11 @@ export class LogPage implements ViewWillEnter {
     await this.notifications.rescheduleForHabit(this.currentId);
     this.showToast("Log enregistré");
     this.resetForm();
+  }
+
+  // Referme le dropdown d'habitude à l'arrivée sur la page (undefined si empty state).
+  private closeDropdown() {
+    this.dropdown?.close();
   }
 
   goToHabits() {

@@ -182,6 +182,7 @@ Deux numéros **indépendants**, tous deux dans `VersionHandlerService` :
 1. **Demander à l'utilisateur l'ampleur** de la version pour choisir le numéro : **majeure** (ex. `2.0`), **mineure** (ex. `1.2`) ou **correctif** (ex. `1.1.1`).
 2. Mettre à jour **de façon synchronisée** : `appVersionDisplay` (`VersionHandlerService`), `versionName` **et** `versionCode` (incrémenté de 1, toujours croissant) dans `android/app/build.gradle`, et une entrée **en tête** de `RELEASE_NOTES` (`utils/release-notes.ts`) listant les points revus (alimente la sous-page « Notes de version »).
 3. Ne **pas** toucher `appVersion` sauf migration de bdd réellement nécessaire.
+4. **Vérifier la cohérence de `README.md` et `CLAUDE.md`** au regard des modifications de la version : répercuter tout changement de fonctionnalité, d'installation, de configuration, d'architecture ou de convention, et corriger toute incohérence introduite. À faire **avant** le commit.
 
 ---
 
