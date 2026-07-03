@@ -53,3 +53,34 @@
   cursor: pointer;
 }
 
+// Bouton secondaire (contour + texte accent) vers la saisie d'un log passé.
+.log-late {
+  margin-top: 8px;
+  padding: 13px;
+  border: 1px solid var(--app-accent);
+  border-radius: var(--app-radius);
+  background: transparent;
+  color: var(--app-accent);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.log-late-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  // Dans la carte de modale (--app-surface), les champs passent en surface-2 pour ressortir.
+  .log-input,
+  .log-textarea {
+    background: var(--app-surface-2);
+  }
+}
+
+.log-late-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+

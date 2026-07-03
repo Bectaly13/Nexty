@@ -12,6 +12,7 @@ import { ThemeService } from 'src/app/services/theme-service';
 import { EmptyStateComponent } from 'src/app/components/empty-state/empty-state.component';
 import { HabitDropdownComponent } from 'src/app/components/habit-dropdown/habit-dropdown.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
+import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 
 @Component({
@@ -21,20 +22,24 @@ import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
   standalone: true,
   imports: [
     IonContent, IonHeader, FormsModule,
-    EmptyStateComponent, HabitDropdownComponent, HeaderComponent, NavbarComponent
+    EmptyStateComponent, HabitDropdownComponent, HeaderComponent, ModalComponent, NavbarComponent
   ]
 })
 export class LogPage implements ViewWillEnter {
   habits: Habit[] = [];
   currentId: string | null = null;
   loaded = false;
-  occurredAt = "";
   comment = "";
   toastOpen = false;
   toastMessage = "";
   private toastTimer: any;
 
+  // Modale « log en retard » : autonome (sa propre habitude, son horodatage à la
+  // seconde, sa note).
+  lateModal = { open: false, habitId: "", occurredAt: "", comment: "" };
+
   @ViewChild(HabitDropdownComponent) private dropdown?: HabitDropdownComponent;
+  @ViewChild('lateDropdown') private lateDropdown?: HabitDropdownComponent;
 
   async ionViewWillEnter() {
     await this.theme.initTheme();
@@ -58,9 +63,8 @@ export class LogPage implements ViewWillEnter {
     this.loaded = true;
   }
 
-  // Réinitialise le formulaire : horodatage = maintenant, commentaire vide.
+  // Réinitialise le formulaire : commentaire vide (l'horodatage est capturé au clic).
   resetForm() {
-    this.occurredAt = dayjs().format("YYYY-MM-DDTHH:mm");
     this.comment = "";
   }
 
@@ -70,18 +74,55 @@ export class LogPage implements ViewWillEnter {
     await this.habitService.setCurrentHabitId(id);
   }
 
-  // Enregistre le log à l'horodatage choisi (par défaut « maintenant », modifiable
-  // pour rattraper un oubli), avec un commentaire optionnel.
+  // Enregistre un log « en direct » : horodaté à l'instant du clic (à la seconde),
+  // avec un commentaire optionnel. Les logs en retard passeront par une modale dédiée.
   async submit() {
     if (!this.currentId) {
       return;
     }
-    const iso = dayjs(this.occurredAt).toISOString();
+    const iso = dayjs().toISOString();
     await this.logService.addLog(this.currentId, iso, this.comment.trim() || null);
     await this.habitService.setCurrentHabitId(this.currentId);
     await this.notifications.rescheduleForHabit(this.currentId);
     this.showToast("Log enregistré");
     this.resetForm();
+  }
+
+  // Ouvre la modale « log en retard » : pré-remplie sur l'habitude courante, horodatage
+  // = maintenant (à la seconde), note vide. Le dropdown de la modale est refermé.
+  openLate() {
+    this.lateModal = {
+      open: true,
+      habitId: this.currentId ?? "",
+      occurredAt: dayjs().format("YYYY-MM-DDTHH:mm"),
+      comment: ""
+    };
+    this.lateDropdown?.close();
+  }
+
+  closeLate() {
+    this.lateModal.open = false;
+  }
+
+  // Changer l'habitude dans la modale met à jour l'habitude courante (propagée à tous
+  // les dropdowns et persistée), en plus de cibler ce log.
+  async onPickLateHabit(id: string) {
+    this.lateModal.habitId = id;
+    this.currentId = id;
+    await this.habitService.setCurrentHabitId(id);
+  }
+
+  // Enregistre un log en retard à l'horodatage saisi (à la seconde).
+  async submitLate() {
+    if (!this.lateModal.habitId) {
+      return;
+    }
+    const iso = dayjs(this.lateModal.occurredAt).toISOString();
+    await this.logService.addLog(this.lateModal.habitId, iso, this.lateModal.comment.trim() || null);
+    await this.habitService.setCurrentHabitId(this.lateModal.habitId);
+    await this.notifications.rescheduleForHabit(this.lateModal.habitId);
+    this.lateModal.open = false;
+    this.showToast("Log enregistré");
   }
 
   // Referme le dropdown d'habitude à l'arrivée sur la page (undefined si empty state).

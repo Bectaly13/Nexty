@@ -22,13 +22,11 @@
         (pick)="onPickHabit($event)">
       </app-habit-dropdown>
 
-      <label class="log-label">Date et heure</label>
-      <input class="log-input" type="datetime-local" [(ngModel)]="occurredAt" />
-
       <label class="log-label">Commentaire (optionnel)</label>
       <textarea class="log-textarea" [(ngModel)]="comment" rows="3" placeholder="Une note…"></textarea>
 
       <button class="log-submit" type="button" (click)="submit()">Enregistrer le log</button>
+      <button class="log-late" type="button" (click)="openLate()">Saisir un log passé</button>
     </div>
   }
 </ion-content>
@@ -38,3 +36,27 @@
 }
 
 <app-navbar class="log-navbar"></app-navbar>
+
+<app-modal [open]="lateModal.open" title="Saisir un log passé" (dismiss)="closeLate()">
+  <div class="log-late-form">
+    <label class="log-label">Habitude</label>
+    <app-habit-dropdown
+      #lateDropdown
+      class="log-dropdown"
+      [habits]="habits"
+      [selectedId]="lateModal.habitId"
+      (pick)="onPickLateHabit($event)">
+    </app-habit-dropdown>
+
+    <label class="log-label">Date et heure</label>
+    <input class="log-input" type="datetime-local" [(ngModel)]="lateModal.occurredAt" />
+
+    <label class="log-label">Commentaire (optionnel)</label>
+    <textarea class="log-textarea" [(ngModel)]="lateModal.comment" rows="3" placeholder="Une note…"></textarea>
+  </div>
+
+  <div class="log-late-actions" modalFooter>
+    <button class="modal-btn" type="button" (click)="closeLate()">Annuler</button>
+    <button class="modal-btn modal-btn-primary" type="button" (click)="submitLate()">Enregistrer</button>
+  </div>
+</app-modal>

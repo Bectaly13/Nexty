@@ -40,7 +40,9 @@ export class HistoryPage implements ViewWillEnter, AfterViewInit, OnDestroy {
   readonly pageSize = 30;
   displayCount = this.pageSize;
 
-  editModal = { open: false, id: "", occurredAt: "", comment: "" };
+  // `baseOccurredAt` = horodatage ISO d'origine, conservé pour ne pas perdre les
+  // secondes (le picker natif n'édite que jusqu'à la minute).
+  editModal = { open: false, id: "", baseOccurredAt: "", occurredAt: "", comment: "" };
   deleteModal = { open: false, id: "" };
 
   @ViewChild('sentinel') private sentinel?: ElementRef<HTMLElement>;
@@ -113,6 +115,7 @@ export class HistoryPage implements ViewWillEnter, AfterViewInit, OnDestroy {
     this.editModal = {
       open: true,
       id: log.id,
+      baseOccurredAt: log.occurredAt,
       occurredAt: dayjs(log.occurredAt).format("YYYY-MM-DDTHH:mm"),
       comment: log.comment ?? ""
     };
@@ -123,7 +126,13 @@ export class HistoryPage implements ViewWillEnter, AfterViewInit, OnDestroy {
   }
 
   async saveEdit() {
-    const iso = dayjs(this.editModal.occurredAt).toISOString();
+    // Le picker n'édite que jusqu'à la minute : on réinjecte les secondes/ms d'origine
+    // pour ne pas les tronquer.
+    const base = dayjs(this.editModal.baseOccurredAt);
+    const iso = dayjs(this.editModal.occurredAt)
+      .second(base.second())
+      .millisecond(base.millisecond())
+      .toISOString();
     await this.logService.editLog(this.editModal.id, {
       occurredAt: iso,
       comment: this.editModal.comment.trim() || null

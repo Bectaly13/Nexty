@@ -9,7 +9,7 @@ Données **100 % locales** sur l'appareil (Ionic Storage), **sans compte ni clou
 ## Fonctionnalités
 
 - **Plusieurs habitudes** : créer, renommer, recolorer (palette figée), supprimer (avec suppression en cascade des logs).
-- **Déclarer un log** (1 log = 1 occurrence) : habitude courante pré-sélectionnée, horodatage modifiable (rattrapage d'oubli), commentaire optionnel.
+- **Déclarer un log** (1 log = 1 occurrence) : en direct (habitude + commentaire, horodaté à la seconde près au moment de l'enregistrement) ou **log passé** via une fenêtre dédiée (date et heure). Habitude courante pré-sélectionnée.
 - **Statistiques par habitude** : durée depuis le dernier log (compteur en direct), comptages du jour / de la semaine / du mois, calendrier mensuel navigable, courbe de tendance (7 / 30 jours).
 - **Historique par habitude** : liste chronologique, chargée par lots, avec édition et suppression des logs.
 - **Notifications locales** : rappel quotidien depuis la dernière occurrence, activable globalement et par habitude.

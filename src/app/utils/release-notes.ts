@@ -8,6 +8,14 @@ export interface ReleaseNote {
 
 export const RELEASE_NOTES: ReleaseNote[] = [
   {
+    version: "1.1",
+    points: [
+      "Les logs sont désormais enregistrés à la seconde près.",
+      "Saisie simplifiée : un log « sur le moment » ne demande plus que l'habitude et un commentaire.",
+      "Nouvelle saisie d'un log passé (date et heure) via une fenêtre dédiée."
+    ]
+  },
+  {
     version: "1.0.1",
     points: [
       "Le sélecteur d'habitude se referme désormais toujours en revenant sur un onglet.",
